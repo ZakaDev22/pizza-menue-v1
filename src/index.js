@@ -94,10 +94,23 @@ function Menu() {
   );
 }
 function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 8;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour < closeHour;
   return (
     <footer className="footer">
-      <p>{new Date().toLocaleDateString()} , We Will Be Open until 22:00 PM</p>
-      <p>Copyright 2023 Fast React Pizza Co.</p>
+      {isOpen ? (
+        <div className="order">
+          <p>
+            We are open until {closeHour}:00. Come visit us or order online!
+          </p>
+        </div>
+      ) : (
+        <div className="order">
+          <p>Sorry, we are closed. We open at {openHour}:00.</p>
+        </div>
+      )}
     </footer>
   );
 }
