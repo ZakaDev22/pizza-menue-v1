@@ -103,7 +103,7 @@ function Footer() {
         <Order closeHour={closeHour} />
       ) : (
         <div className="order">
-          <p>Sorry, we are closed. We open at {openHour}:00.</p>
+          <p id="CloseMsg">Sorry, we are closed. We open at {openHour}:00.</p>
         </div>
       )}
     </footer>
@@ -127,8 +127,10 @@ function Pizza(props) {
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
         <h2>{props.pizzaObj.name}</h2>
-        <p>Price: ${props.pizzaObj.price}</p>
-        <p>{props.pizzaObj.ingredients}</p>
+        <p>
+          Price: $<span id="price">{props.pizzaObj.price}</span>
+        </p>
+        <p id="ingredients">{props.pizzaObj.ingredients}</p>
       </div>
     </li>
   );
