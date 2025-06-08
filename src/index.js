@@ -71,24 +71,22 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.length > 0 &&
-          pizzaData.map((pizza) => <Pizza pizzaObj={pizza} key={pizza.name} />)}
-      </ul>
-
-      {/* <Pizza
-        name="Pizza Prosciutto"
-        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-        photoName="pizzas/prosciutto.jpg"
-        price={10}
-      />
-
-      <Pizza
-        name="Pizza Salamino"
-        ingredients="Tomato, mozarella, and pepperoni"
-        photoName="pizzas/salamino.jpg"
-        price={15}
-      /> */}
+      {pizzaData.length > 0 ? (
+        <>
+          <p>
+            Authentic Italian cuisine. All pizzas are made with fresh
+            ingredients and love.
+          </p>
+          <ul className="pizzas">
+            {pizzaData.length > 0 &&
+              pizzaData.map((pizza) => (
+                <Pizza pizzaObj={pizza} key={pizza.name} />
+              ))}
+          </ul>
+        </>
+      ) : (
+        <p>We are still working on our menu. Please come back later!</p>
+      )}
     </main>
   );
 }
@@ -100,7 +98,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <Order closeHour={closeHour} />
+        <Order closeHour={closeHour} OpenHour={openHour} />
       ) : (
         <div className="order">
           <p id="CloseMsg">Sorry, we are closed. We open at {openHour}:00.</p>
@@ -110,27 +108,28 @@ function Footer() {
   );
 }
 
-function Order(props) {
+function Order({ closeHour, OpenHour }) {
   return (
     <div className="order">
       <p>
-        We are open until {props.closeHour}:00. Come visit us or order online!
+        We are open From {OpenHour}:00 until {closeHour}:00. Come visit us or
+        order online!
       </p>
       <button className="btn">Order Now</button>
     </div>
   );
 }
 
-function Pizza(props) {
+function Pizza({ pizzaObj }) {
   return (
     <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h2>{props.pizzaObj.name}</h2>
+        <h2>{pizzaObj.name}</h2>
         <p>
-          Price: $<span id="price">{props.pizzaObj.price}</span>
+          Price: $<span id="price">{pizzaObj.price}</span>
         </p>
-        <p id="ingredients">{props.pizzaObj.ingredients}</p>
+        <p id="ingredients">{pizzaObj.ingredients}</p>
       </div>
     </li>
   );
