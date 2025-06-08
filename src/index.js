@@ -122,14 +122,25 @@ function Order({ closeHour, OpenHour }) {
 
 function Pizza({ pizzaObj }) {
   return (
-    <li className="pizza">
+    <li className={"pizza" + (pizzaObj.soldOut ? " sold-out" : "")}>
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
         <h2>{pizzaObj.name}</h2>
-        <p>
-          Price: $<span id="price">{pizzaObj.price}</span>
-        </p>
         <p id="ingredients">{pizzaObj.ingredients}</p>
+
+        <p>
+          <span className="price">£{pizzaObj.price}</span>
+          {pizzaObj.soldOut ? (
+            <span
+              className="sold-out"
+              style={{ color: "red", fontWeight: "bold" }}
+            >
+              Sold Out
+            </span>
+          ) : (
+            ""
+          )}
+        </p>
       </div>
     </li>
   );
